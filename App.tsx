@@ -15,6 +15,7 @@ import ScheduleInteractionPage from './pages/ScheduleInteractionPage';
 import FeePaymentPage from './pages/FeePaymentPage';
 import NewsEventsPage from './pages/NewsEventsPage';
 import ResultsPage from './pages/ResultsPage';
+import IDCardGeneratorPage from './pages/IDCardGeneratorPage';
 
 const App: React.FC = () => {
   return (
@@ -29,6 +30,7 @@ const App: React.FC = () => {
             <Route path="/news-events" element={<NewsEventsPage />} />
             <Route path="/admission" element={<AdmissionPage />} />
             <Route path="/results" element={<ResultsPage />} />
+            <Route path="/id-card" element={<IDCardGeneratorPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/apply-online" element={<ApplyOnlinePage />} />
             <Route path="/document-upload" element={<DocumentUploadPage />} />

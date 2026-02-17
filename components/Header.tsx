@@ -49,6 +49,7 @@ const Header: React.FC = () => {
             <NavLink to="/news-events" className={navLinkClass}>News & Events</NavLink>
             <NavLink to="/admission" className={navLinkClass}>Admission</NavLink>
             <NavLink to="/results" className={navLinkClass}>Results</NavLink>
+            <NavLink to="/id-card" className={navLinkClass}>ID Card</NavLink>
             <NavLink to="/contact" className={navLinkClass}>Contact Us</NavLink>
           </nav>
 
@@ -90,6 +91,7 @@ const Header: React.FC = () => {
                 { to: "/news-events", label: "News & Events" },
                 { to: "/admission", label: "Admission" },
                 { to: "/results", label: "Results" },
+                { to: "/id-card", label: "ID Card" },
                 { to: "/contact", label: "Contact Us" }
               ].map((link) => (
                 <NavLink

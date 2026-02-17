@@ -1,8 +1,6 @@
 
-import { GoogleGenAI, Chat, GenerateContentResponse } from "@google/genai";
+import { GoogleGenAI } from "@google/genai";
 import type { ChatMessage } from '../types';
-
-let chat: Chat | null = null;
 
 const systemInstruction = `You are "SaraswatiBot", a friendly and helpful AI admission assistant for Heria Saraswati Vidyaniketan (হেঁড়িয়া সরস্বতী বিদ্যানিকেতন). Your goal is to guide parents through the admission process and answer their questions clearly and concisely.
 
@@ -32,30 +30,39 @@ const systemInstruction = `You are "SaraswatiBot", a friendly and helpful AI adm
 3.  **Collect Enquiries:** If a user is interested, ask for their name and phone number.
 4.  **Provide Quick Replies:** At the end of your response, ALWAYS provide 2-4 relevant follow-up questions or actions as quick replies in brackets. Format: [What's the fee for Class 1?] [How to apply?].`;
 
-function getChatInstance(): Chat {
-  if (!chat) {
-    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
-    chat = ai.chats.create({
+export const sendMessageToGemini = async (
+  messageText: string,
+  history: ChatMessage[]
+): Promise<{ text: string | undefined }> => {
+  try {
+    // Creating a fresh instance inside the call ensures we always have the latest API key
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    
+    // Map existing history to Gemini's expected Content format
+    const contents = history.map(msg => ({
+      role: msg.sender === 'user' ? 'user' : 'model',
+      parts: [{ text: msg.text }]
+    }));
+
+    // Add the current message
+    contents.push({
+      role: 'user',
+      parts: [{ text: messageText }]
+    });
+
+    const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
+      contents,
       config: {
         systemInstruction,
+        temperature: 0.7,
+        topP: 0.95,
       },
     });
-  }
-  return chat;
-}
 
-export const sendMessageToGemini = async (
-  message: string,
-  _history: ChatMessage[]
-): Promise<GenerateContentResponse> => {
-  try {
-    const chatInstance = getChatInstance();
-    const result = await chatInstance.sendMessage({ message });
-    return result;
+    return { text: response.text };
   } catch (error) {
     console.error("Gemini API error:", error);
-    chat = null;
-    throw new Error("Failed to get a response from the AI assistant.");
+    throw error;
   }
 };
