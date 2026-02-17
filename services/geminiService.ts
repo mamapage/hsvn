@@ -35,16 +35,25 @@ export const sendMessageToGemini = async (
   history: ChatMessage[]
 ): Promise<{ text: string | undefined }> => {
   try {
-    // Creating a fresh instance inside the call ensures we always have the latest API key
-    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    const apiKey = process.env.API_KEY;
+    if (!apiKey) {
+      throw new Error("API Key is missing. Please check your environment variables.");
+    }
+
+    const ai = new GoogleGenAI({ apiKey });
     
-    // Map existing history to Gemini's expected Content format
-    const contents = history.map(msg => ({
+    // Gemini Chat API requires the conversation to START with a 'user' message.
+    // Our 'history' might start with a bot greeting. We must skip it for the API payload.
+    const firstUserIndex = history.findIndex(m => m.sender === 'user');
+    const validHistory = firstUserIndex !== -1 ? history.slice(firstUserIndex) : [];
+
+    // Map history to Gemini's expected format
+    const contents = validHistory.map(msg => ({
       role: msg.sender === 'user' ? 'user' : 'model',
       parts: [{ text: msg.text }]
     }));
 
-    // Add the current message
+    // Add the current user message
     contents.push({
       role: 'user',
       parts: [{ text: messageText }]
@@ -60,9 +69,18 @@ export const sendMessageToGemini = async (
       },
     });
 
+    if (!response || !response.text) {
+      throw new Error("The AI returned an empty response.");
+    }
+
     return { text: response.text };
-  } catch (error) {
-    console.error("Gemini API error:", error);
+  } catch (error: any) {
+    // Log detailed error for debugging in Vercel console
+    console.error("Gemini Service Error Detail:", {
+      message: error.message,
+      status: error.status,
+      stack: error.stack
+    });
     throw error;
   }
 };

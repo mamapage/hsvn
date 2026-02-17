@@ -22,7 +22,7 @@ const AdmissionChatAgent: React.FC = () => {
         setMessages([
           {
             id: Date.now(),
-            text: "Hello! I'm BlossomBot, your AI assistant for admissions. How can I help you today? 🌸",
+            text: "Hello! I'm BlossomBot, your AI assistant for admissions at Heria Saraswati Vidyaniketan. How can I help you today? 🌸",
             sender: 'bot',
             quickReplies: ["What's the admission process?", "Tell me about the fees", "What are the school timings?"],
           },
@@ -53,12 +53,16 @@ const AdmissionChatAgent: React.FC = () => {
       sender: 'user',
     };
 
+    // Capture the current history before updating state
+    const currentHistory = [...messages];
+    
     setMessages((prev) => [...prev, userMessage]);
     setInputValue('');
     setIsLoading(true);
 
     try {
-      const response = await sendMessageToGemini(messageText, messages);
+      // Pass the history (excluding the current user message which is handled inside the service)
+      const response = await sendMessageToGemini(messageText, currentHistory);
       
       if (response && response.text) {
         const { text, quickReplies } = parseResponse(response.text);
@@ -70,13 +74,14 @@ const AdmissionChatAgent: React.FC = () => {
         };
         setMessages((prev) => [...prev, botMessage]);
       } else {
-         throw new Error("No text returned from Gemini.");
+         throw new Error("Empty response received from AI.");
       }
-    } catch (error) {
-      console.error("Chat agent error:", error);
+    } catch (error: any) {
+      console.error("AdmissionChatAgent Error:", error);
+      
       const errorMessage: ChatMessage = {
         id: Date.now() + 1,
-        text: "I'm sorry, I'm having a little trouble connecting to my brain right now. Please try again in a few seconds!",
+        text: `I'm sorry, I'm having trouble connecting to my brain right now (${error.message || 'Connection Error'}). Please check your internet or try again in a moment!`,
         sender: 'bot',
       };
       setMessages((prev) => [...prev, errorMessage]);
