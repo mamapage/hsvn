@@ -47,7 +47,7 @@ const Header: React.FC = () => {
 
           <div className="flex items-center">
             <NavLink
-              to="/admission"
+              to="/apply-online"
               className="hidden md:inline-block bg-brand-primary text-white font-bold py-2 px-5 rounded-full hover:bg-opacity-90 transition-transform duration-300 hover:scale-105 shadow-soft"
             >
               Apply Now
@@ -73,7 +73,7 @@ const Header: React.FC = () => {
               <NavLink to="/admission" className={navLinkClass} onClick={() => setIsMenuOpen(false)}>Admission</NavLink>
               <NavLink to="/contact" className={navLinkClass} onClick={() => setIsMenuOpen(false)}>Contact</NavLink>
                <NavLink
-                to="/admission"
+                to="/apply-online"
                 className="bg-brand-primary text-white text-center font-bold py-2 px-5 rounded-full hover:bg-opacity-90 transition-transform duration-300 hover:scale-105 shadow-soft mt-2"
                 onClick={() => setIsMenuOpen(false)}
               >

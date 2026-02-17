@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const AdmissionPage: React.FC = () => {
   return (
@@ -16,24 +17,32 @@ const AdmissionPage: React.FC = () => {
         
         <ol className="relative border-l border-gray-200 space-y-10">
             <li className="ml-6">
-                <span className="absolute flex items-center justify-center w-6 h-6 bg-brand-light-blue rounded-full -left-3 ring-8 ring-white">1</span>
-                <h3 className="font-semibold text-gray-900">Online Application</h3>
-                <p className="text-sm text-gray-600">Fill out our interactive admission form with your child's and parents' details.</p>
+                <span className="absolute flex items-center justify-center w-6 h-6 bg-brand-primary text-white rounded-full -left-3 ring-8 ring-white">1</span>
+                <Link to="/apply-online" className="p-1 -m-1 block group">
+                  <h3 className="font-semibold text-gray-900 group-hover:text-brand-primary transition-colors">Online Application</h3>
+                  <p className="text-sm text-gray-600">Click here to fill out our interactive admission form with your child's and parents' details.</p>
+                </Link>
             </li>
             <li className="ml-6">
-                <span className="absolute flex items-center justify-center w-6 h-6 bg-brand-light-blue rounded-full -left-3 ring-8 ring-white">2</span>
-                <h3 className="font-semibold text-gray-900">Document Submission</h3>
-                <p className="text-sm text-gray-600">Upload the required documents securely through our portal.</p>
+                <span className="absolute flex items-center justify-center w-6 h-6 bg-brand-primary text-white rounded-full -left-3 ring-8 ring-white">2</span>
+                <Link to="/document-upload" className="p-1 -m-1 block group">
+                  <h3 className="font-semibold text-gray-900 group-hover:text-brand-primary transition-colors">Document Submission</h3>
+                  <p className="text-sm text-gray-600">Click here to upload the required documents securely through our portal.</p>
+                </Link>
             </li>
             <li className="ml-6">
-                <span className="absolute flex items-center justify-center w-6 h-6 bg-brand-light-blue rounded-full -left-3 ring-8 ring-white">3</span>
-                <h3 className="font-semibold text-gray-900">School Interaction</h3>
-                <p className="text-sm text-gray-600">A friendly interaction session with the child and parents will be scheduled.</p>
+                <span className="absolute flex items-center justify-center w-6 h-6 bg-brand-primary text-white rounded-full -left-3 ring-8 ring-white">3</span>
+                 <Link to="/schedule-interaction" className="p-1 -m-1 block group">
+                    <h3 className="font-semibold text-gray-900 group-hover:text-brand-primary transition-colors">School Interaction</h3>
+                    <p className="text-sm text-gray-600">Click here to schedule a friendly interaction session with the child and parents.</p>
+                </Link>
             </li>
             <li className="ml-6">
-                <span className="absolute flex items-center justify-center w-6 h-6 bg-brand-light-blue rounded-full -left-3 ring-8 ring-white">4</span>
-                <h3 className="font-semibold text-gray-900">Fee Payment</h3>
-                <p className="text-sm text-gray-600">Once admission is confirmed, complete the fee payment online to secure the seat.</p>
+                <span className="absolute flex items-center justify-center w-6 h-6 bg-brand-primary text-white rounded-full -left-3 ring-8 ring-white">4</span>
+                <Link to="/fee-payment" className="p-1 -m-1 block group">
+                    <h3 className="font-semibold text-gray-900 group-hover:text-brand-primary transition-colors">Fee Payment</h3>
+                    <p className="text-sm text-gray-600">Once admission is confirmed, click here to complete the fee payment online.</p>
+                </Link>
             </li>
         </ol>
 

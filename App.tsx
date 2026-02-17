@@ -9,6 +9,10 @@ import CoursesPage from './pages/CoursesPage';
 import AdmissionPage from './pages/AdmissionPage';
 import ContactPage from './pages/ContactPage';
 import AdmissionChatAgent from './components/AdmissionChatAgent';
+import ApplyOnlinePage from './pages/ApplyOnlinePage';
+import DocumentUploadPage from './pages/DocumentUploadPage';
+import ScheduleInteractionPage from './pages/ScheduleInteractionPage';
+import FeePaymentPage from './pages/FeePaymentPage';
 
 const App: React.FC = () => {
   return (
@@ -22,6 +26,10 @@ const App: React.FC = () => {
             <Route path="/courses" element={<CoursesPage />} />
             <Route path="/admission" element={<AdmissionPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/apply-online" element={<ApplyOnlinePage />} />
+            <Route path="/document-upload" element={<DocumentUploadPage />} />
+            <Route path="/schedule-interaction" element={<ScheduleInteractionPage />} />
+            <Route path="/fee-payment" element={<FeePaymentPage />} />
           </Routes>
         </main>
         <Footer />
