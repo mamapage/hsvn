@@ -29,14 +29,14 @@ const Header: React.FC = () => {
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-20 md:h-24">
           <NavLink to="/" className="flex items-center space-x-2 flex-shrink-0">
-            <BlossomIcon className="w-10 h-10 text-brand-primary" />
+            <BlossomIcon className="w-10 h-10 md:w-12 md:h-12 text-brand-primary" />
             <div className="flex flex-col">
-              <span className="text-base md:text-lg font-bold font-poppins text-gray-800 leading-tight">
+              <span className="text-sm sm:text-base md:text-lg lg:text-xl font-bold font-poppins text-gray-800 leading-tight">
                 Heria Saraswati Vidyaniketan
               </span>
-              <span className="text-[10px] md:text-xs font-semibold text-brand-primary">
+              <span className="text-[9px] sm:text-[10px] md:text-xs font-semibold text-brand-primary uppercase tracking-wider">
                 হেঁড়িয়া সরস্বতী বিদ্যানিকেতন
               </span>
             </div>
@@ -52,42 +52,70 @@ const Header: React.FC = () => {
             <NavLink to="/contact" className={navLinkClass}>Contact Us</NavLink>
           </nav>
 
-          <div className="flex items-center flex-shrink-0 ml-4">
+          <div className="flex items-center flex-shrink-0 ml-2 sm:ml-4">
             <NavLink
               to="/apply-online"
-              className="hidden sm:inline-block bg-brand-primary text-white text-xs font-bold py-2 px-4 rounded-full hover:bg-opacity-90 transition-transform duration-300 hover:scale-105 shadow-soft uppercase tracking-tighter"
+              className="hidden sm:inline-block bg-brand-primary text-white text-xs font-bold py-2.5 px-5 rounded-full hover:bg-opacity-90 transition-all duration-300 hover:scale-105 shadow-soft uppercase tracking-tighter"
             >
               Apply Now
             </NavLink>
+            
+            {/* Improved Mobile Menu Toggle */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden ml-4 p-2 rounded-md text-gray-600 hover:bg-gray-100"
-              aria-label="Open menu"
+              className="lg:hidden ml-2 p-2.5 rounded-xl text-gray-700 bg-white/50 border border-gray-100 shadow-sm hover:bg-white hover:text-brand-primary active:scale-95 transition-all duration-200"
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-              </svg>
+              {isMenuOpen ? (
+                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+              ) : (
+                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 6h16M4 12h16m-12 6h12"></path>
+                </svg>
+              )}
             </button>
           </div>
         </div>
-        {/* Mobile Menu */}
+
+        {/* Improved Mobile Menu Overlay */}
         {isMenuOpen && (
-          <div className="lg:hidden pb-4 bg-white/95 rounded-b-2xl absolute left-0 right-0 px-4 shadow-lg border-t border-gray-100">
-            <nav className="flex flex-col space-y-2 py-4">
-              <NavLink to="/" className={navLinkClass} onClick={() => setIsMenuOpen(false)}>Home</NavLink>
-              <NavLink to="/about" className={navLinkClass} onClick={() => setIsMenuOpen(false)}>About Us</NavLink>
-              <NavLink to="/courses" className={navLinkClass} onClick={() => setIsMenuOpen(false)}>Courses</NavLink>
-              <NavLink to="/news-events" className={navLinkClass} onClick={() => setIsMenuOpen(false)}>News & Events</NavLink>
-              <NavLink to="/admission" className={navLinkClass} onClick={() => setIsMenuOpen(false)}>Admission</NavLink>
-              <NavLink to="/results" className={navLinkClass} onClick={() => setIsMenuOpen(false)}>Results</NavLink>
-              <NavLink to="/contact" className={navLinkClass} onClick={() => setIsMenuOpen(false)}>Contact Us</NavLink>
-               <NavLink
-                to="/apply-online"
-                className="bg-brand-primary text-white text-center font-bold py-3 px-5 rounded-full hover:bg-opacity-90 transition-transform duration-300 hover:scale-105 shadow-soft mt-2 uppercase text-sm"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Apply Now
-              </NavLink>
+          <div className="lg:hidden absolute left-0 right-0 top-full bg-white shadow-2xl border-t border-gray-100 rounded-b-3xl overflow-hidden animate-slide-down">
+            <nav className="flex flex-col p-6 space-y-1">
+              {[
+                { to: "/", label: "Home" },
+                { to: "/about", label: "About Us" },
+                { to: "/courses", label: "Courses" },
+                { to: "/news-events", label: "News & Events" },
+                { to: "/admission", label: "Admission" },
+                { to: "/results", label: "Results" },
+                { to: "/contact", label: "Contact Us" }
+              ].map((link) => (
+                <NavLink
+                  key={link.to}
+                  to={link.to}
+                  className={({ isActive }) => 
+                    `block px-4 py-4 text-sm font-bold rounded-xl transition-all duration-200 ${
+                      isActive 
+                        ? 'bg-brand-primary/10 text-brand-primary' 
+                        : 'text-gray-600 hover:bg-gray-50'
+                    }`
+                  }
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {link.label}
+                </NavLink>
+              ))}
+              <div className="pt-4">
+                <NavLink
+                  to="/apply-online"
+                  className="block w-full bg-brand-primary text-white text-center font-bold py-4 rounded-xl hover:bg-opacity-90 transition-transform active:scale-95 shadow-soft uppercase text-sm tracking-wide"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Apply Now
+                </NavLink>
+              </div>
             </nav>
           </div>
         )}
