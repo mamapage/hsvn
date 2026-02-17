@@ -10,13 +10,19 @@ const ApplyOnlinePage: React.FC = () => {
     setSubmitted(true);
   };
 
+  const programs = [
+    'Playgroup (2-3 years)', 'Nursery (3-4 years)', 'LKG (4-5 years)', 'UKG (5-6 years)',
+    'Class 1 (6-7 years)', 'Class 2 (7-8 years)', 'Class 3 (8-9 years)',
+    'Class 4 (9-10 years)', 'Class 5 (10-11 years)', 'Class 6 (11-12 years)'
+  ];
+
   if (submitted) {
     return (
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
         <div className="max-w-2xl mx-auto bg-white p-8 sm:p-12 rounded-2xl shadow-soft">
           <h1 className="text-3xl font-bold font-poppins text-brand-primary">Application Submitted!</h1>
           <p className="mt-4 text-gray-600">
-            Thank you for your interest in Little Blossoms International Nursery School. We have received your application and our admissions team will review it shortly. We will get in touch with you regarding the next steps.
+            Thank you for your interest in Heria Saraswati Vidyaniketan. We have received your application and our admissions team will review it shortly.
           </p>
           <Link
             to="/"
@@ -34,7 +40,7 @@ const ApplyOnlinePage: React.FC = () => {
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold font-poppins text-gray-800">Online Application Form</h1>
         <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
-          Please fill out the form below to begin the admission process for your child.
+          Please fill out the form below to begin the admission process for your child at Heria Saraswati Vidyaniketan.
         </p>
       </div>
 
@@ -55,7 +61,7 @@ const ApplyOnlinePage: React.FC = () => {
               <div>
                 <label htmlFor="gender" className="block text-sm font-medium text-gray-700">Gender</label>
                 <select id="gender" required className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-brand-primary focus:border-brand-primary">
-                  <option>Select Gender</option>
+                  <option value="">Select Gender</option>
                   <option>Male</option>
                   <option>Female</option>
                   <option>Other</option>
@@ -64,11 +70,8 @@ const ApplyOnlinePage: React.FC = () => {
               <div>
                 <label htmlFor="program" className="block text-sm font-medium text-gray-700">Program Applying For</label>
                 <select id="program" required className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-brand-primary focus:border-brand-primary">
-                  <option>Select Program</option>
-                  <option>Playgroup (2-3 years)</option>
-                  <option>Nursery (3-4 years)</option>
-                  <option>LKG (4-5 years)</option>
-                  <option>UKG (5-6 years)</option>
+                  <option value="">Select Program</option>
+                  {programs.map(p => <option key={p} value={p}>{p}</option>)}
                 </select>
               </div>
             </div>

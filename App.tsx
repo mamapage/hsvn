@@ -13,6 +13,8 @@ import ApplyOnlinePage from './pages/ApplyOnlinePage';
 import DocumentUploadPage from './pages/DocumentUploadPage';
 import ScheduleInteractionPage from './pages/ScheduleInteractionPage';
 import FeePaymentPage from './pages/FeePaymentPage';
+import NewsEventsPage from './pages/NewsEventsPage';
+import ResultsPage from './pages/ResultsPage';
 
 const App: React.FC = () => {
   return (
@@ -24,7 +26,9 @@ const App: React.FC = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/courses" element={<CoursesPage />} />
+            <Route path="/news-events" element={<NewsEventsPage />} />
             <Route path="/admission" element={<AdmissionPage />} />
+            <Route path="/results" element={<ResultsPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/apply-online" element={<ApplyOnlinePage />} />
             <Route path="/document-upload" element={<DocumentUploadPage />} />

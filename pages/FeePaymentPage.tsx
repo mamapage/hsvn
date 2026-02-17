@@ -7,6 +7,12 @@ const courseFees: { [key: string]: { name: string; amount: number } } = {
   nursery: { name: 'Nursery', amount: 85000 },
   lkg: { name: 'LKG', amount: 95000 },
   ukg: { name: 'UKG', amount: 105000 },
+  class1: { name: 'Class 1', amount: 115000 },
+  class2: { name: 'Class 2', amount: 115000 },
+  class3: { name: 'Class 3', amount: 125000 },
+  class4: { name: 'Class 4', amount: 125000 },
+  class5: { name: 'Class 5', amount: 135000 },
+  class6: { name: 'Class 6', amount: 145000 },
 };
 
 const FeePaymentPage: React.FC = () => {
@@ -35,7 +41,7 @@ const FeePaymentPage: React.FC = () => {
         <div className="max-w-2xl mx-auto bg-white p-8 sm:p-12 rounded-2xl shadow-soft">
           <h1 className="text-3xl font-bold font-poppins text-brand-primary">Payment Successful!</h1>
           <p className="mt-4 text-gray-600">
-            Congratulations! 🎉 Your payment of ₹{fee.toLocaleString('en-IN')} for the {courseName} program has been processed. Your child's admission to Little Blossoms International Nursery School is confirmed. Welcome to our family! We will be in touch with details about the school orientation.
+            Congratulations! 🎉 Your payment of ₹{fee.toLocaleString('en-IN')} for the {courseName} program has been processed. Your child's admission to Heria Saraswati Vidyaniketan is confirmed. Welcome to our family!
           </p>
           <Link
             to="/"
@@ -53,7 +59,7 @@ const FeePaymentPage: React.FC = () => {
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold font-poppins text-gray-800">Fee Payment</h1>
         <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
-         Complete the final step to confirm your child's admission. Please select the program and enter your payment details below.
+         Complete the final step to confirm your child's admission at Heria Saraswati Vidyaniketan. Please select the program and enter your payment details below.
         </p>
       </div>
 
@@ -63,10 +69,9 @@ const FeePaymentPage: React.FC = () => {
             <label htmlFor="program" className="block text-sm font-medium text-gray-700">Select Program</label>
             <select id="program" value={selectedCourse} onChange={handleCourseChange} required className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-brand-primary focus:border-brand-primary">
               <option value="">-- Select a Program --</option>
-              <option value="playgroup">Playgroup (2-3 years)</option>
-              <option value="nursery">Nursery (3-4 years)</option>
-              <option value="lkg">LKG (4-5 years)</option>
-              <option value="ukg">UKG (5-6 years)</option>
+              {Object.keys(courseFees).map(key => (
+                <option key={key} value={key}>{courseFees[key].name}</option>
+              ))}
             </select>
           </div>
 

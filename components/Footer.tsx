@@ -11,12 +11,17 @@ const Footer: React.FC = () => {
           <div className="md:col-span-1">
             <div className="flex items-center space-x-2 mb-4">
               <BlossomIcon className="w-10 h-10 text-brand-primary" />
-              <span className="text-xl font-bold font-poppins text-gray-800">
-                Little Blossoms
-              </span>
+              <div className="flex flex-col">
+                <span className="text-lg font-bold font-poppins text-gray-800 leading-tight">
+                  Heria Saraswati Vidyaniketan
+                </span>
+                <span className="text-xs font-semibold text-brand-primary">
+                  হেঁড়িয়া সরস্বতী বিদ্যানিকেতন
+                </span>
+              </div>
             </div>
             <p className="text-gray-500 text-sm">
-              Where Little Minds Blossom Into Bright Futures.
+              Shaping Young Minds for a Brighter Future.
             </p>
           </div>
           <div>
@@ -31,9 +36,9 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="font-bold text-gray-800 mb-4">Contact Info</h3>
             <ul className="space-y-2 text-sm text-gray-600">
-              <li>123 Blossom Lane, Education City, 45678</li>
-              <li>+1 (234) 567-890</li>
-              <li>info@littleblossoms.school</li>
+              <li>Heria Main Road, Purba Medinipur, West Bengal</li>
+              <li>+91 (0322) 234-567</li>
+              <li>info@heriavidyaniketan.edu</li>
             </ul>
           </div>
           <div>
@@ -48,7 +53,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
         <div className="mt-8 border-t border-gray-200 pt-6 text-center text-sm text-gray-500">
-          <p>&copy; {new Date().getFullYear()} Little Blossoms International Nursery School. All Rights Reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Heria Saraswati Vidyaniketan. All Rights Reserved.</p>
         </div>
       </div>
     </footer>
